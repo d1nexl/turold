@@ -1,24 +1,14 @@
 import type { Dict } from "@/lib/dictionaries";
 import { site } from "@/lib/site";
 import NovaflowCredit from "./NovaflowCredit";
-import FooterBook from "./FooterBook";
 
-/** Dark wine footer: a big sign-off line with the booking button, then four plain columns. */
+/** Dark wine footer: four plain columns and the credit row. */
 export default function Footer({ dict }: { dict: Dict }) {
   const t = dict.footer;
   return (
     <footer id="paticka" data-tone="dark" className="relative overflow-hidden bg-[#1d1214] text-white">
-      <div className="wrap pt-[clamp(90px,9vw,150px)]">
-        <div className="flex flex-wrap items-end justify-between gap-10 border-b border-white/15 pb-[clamp(50px,6vw,90px)]">
-          <h2 className="font-serif text-[clamp(48px,6vw,112px)] font-light leading-[0.98] tracking-[-0.02em]">
-            {t.headline[0]}
-            <br />
-            {t.headline[1]}
-          </h2>
-          <FooterBook label={dict.header.book} />
-        </div>
-
-        <div className="grid gap-12 py-[clamp(50px,6vw,80px)] sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+      <div className="wrap">
+        <div className="grid gap-12 py-[clamp(70px,7vw,110px)] sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
             <span className="font-serif text-[30px] tracking-[0.14em]">TUROLD</span>
             <p className="mt-3 text-[13px] uppercase tracking-[0.26em] text-white/75">{dict.header.tagline}</p>

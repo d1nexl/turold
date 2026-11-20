@@ -192,7 +192,6 @@ const cs = {
       { label: "Dárkové poukazy", img: "/img/glass-view.webp", id: "poptavka" },
       { label: "Vinný sklep", img: "/img/cellar-barrels.webp", id: "sklep" },
     ],
-    headline: ["Uvidíme se", "v Mikulově."],
     cols: { address: "Adresa", contact: "Kontakt", menu: "Menu", follow: "Sledujte nás" },
     concept: "Koncept webu pro ukázku. Penzion TUROLD je smyšlený.",
     rights: "Všechna práva vyhrazena",

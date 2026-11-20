@@ -194,7 +194,6 @@ const en: Dict = {
       { label: "Gift vouchers", img: "/img/glass-view.webp", id: "poptavka" },
       { label: "Wine cellar", img: "/img/cellar-barrels.webp", id: "sklep" },
     ],
-    headline: ["See you", "in Mikulov."],
     cols: { address: "Address", contact: "Contact", menu: "Menu", follow: "Follow us" },
     concept: "A website concept for demonstration. TUROLD guesthouse is fictional.",
     rights: "All rights reserved",
