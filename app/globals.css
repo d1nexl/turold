@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+/*
+ * Self-hosted variable fonts (SIL OFL, files from Fontsource) in /public/fonts.
+ * Newsreader = serif headings, Jost = everything else (thin 200 for light headings).
+ * Czech needs both latin and latin-ext.
+ */
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/newsreader-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/newsreader-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/jost-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/jost-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #f4f4f2;
+  --color-band: #d9d6cf;
+  --color-line: #e4e2dd;
+  --color-ink: #1e1e1c;
+  --color-soft: #55574f;
+  --color-night: #111110;
+  --color-wine: #4a2730;
+  --color-wine-deep: #3a1d25;
+  --color-sage: #b39064;
+  --color-sage-deep: #8f6f45;
+
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .draw,
+  .hero-zoom {
+    animation: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  a,
+  button,
+  [role="button"],
+  summary,
+  select,
+  label {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-wine);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 1.5px solid var(--color-sage-deep);
+    outline-offset: 3px;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5.8vw, 112px);
+  }
+
+  /* Letter-spaced caps (nav / buttons / labels) */
+  .caps {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .caps-wide {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Serif headings */
+  .h-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(34px, 3.3vw, 60px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .h-serif-lg {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(40px, 3.9vw, 72px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  /* Thin headings */
+  .h-thin {
+    font-family: var(--font-sans);
+    font-weight: 200;
+    font-size: clamp(38px, 3.7vw, 70px);
+    line-height: 1.06;
+    letter-spacing: 0.035em;
+  }
+  .sub-thin {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(19px, 1.35vw, 24px);
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+  .body-soft {
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--color-soft);
+  }
+
+  /* Short rule */
+  .rule {
+    display: block;
+    width: 56px;
+    height: 3px;
+    background: currentColor;
+  }
+
+  /* Underline that draws from the left on hover */
+  .ulink {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.6s var(--ease-soft);
+    padding-bottom: 2px;
+  }
+  .ulink:hover,
+  .ulink:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Link with arrow that slides */
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .arrow-link svg {
+    transition: transform 0.5s var(--ease-soft);
+  }
+  .arrow-link:hover svg {
+    transform: translateX(6px);
+  }
+
+  /* Text that rolls up on hover (buttons) */
+  .roll {
+    display: inline-grid;
+    overflow: hidden;
+    line-height: 1.25;
+  }
+  .roll > span {
+    grid-area: 1 / 1;
+    transition: transform 0.55s var(--ease-soft);
+  }
+  .roll > span + span {
+    transform: translateY(110%);
+  }
+  .group:hover .roll > span:first-child,
+  .roll:hover > span:first-child {
+    transform: translateY(-110%);
+  }
+  .group:hover .roll > span + span,
+  .roll:hover > span + span {
+    transform: translateY(0);
+  }
+
+  /* Pill buttons */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 54px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    transition:
+      background-color 0.4s var(--ease-soft),
+      transform 0.4s var(--ease-soft);
+    white-space: nowrap;
+  }
+  .pill-wine {
+    background: var(--color-wine);
+  }
+  .pill-wine:hover {
+    background: var(--color-wine-deep);
+  }
+  .pill-sage {
+    background: var(--color-sage);
+  }
+  .pill-sage:hover {
+    background: var(--color-sage-deep);
+  }
+  .pill-line {
+    color: inherit;
+    border: 1px solid currentColor;
+    background: transparent;
+  }
+  .pill-line:hover {
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  .pill:disabled {
+    opacity: 0.45;
+  }
+
+  /* Image zoom on hover inside an overflow-hidden frame */
+  .zoom img {
+    transition: transform 1.4s var(--ease-soft);
+  }
+  .zoom:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Subtle paper grain */
+  .paper {
+    background-color: var(--color-mist);
+  }
+
+  /* Hero entrance (CSS so it doesn't wait for hydration) */
+  .rise {
+    animation: rise 1.3s var(--ease-soft) both;
+  }
+  .draw {
+    transform-origin: left;
+    animation: draw 1.2s var(--ease-soft) both;
+  }
+  .hero-zoom {
+    animation: hero-zoom 2.6s var(--ease-soft) both;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

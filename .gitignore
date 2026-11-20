@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.env*
+*.tsbuildinfo
+next-env.d.ts
+.playwright-mcp
+
+# private working notes (references)
+_notes/

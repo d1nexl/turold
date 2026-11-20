@@ -1,0 +1,79 @@
+/* =========================================================
+   NovaFlow credit – podpis „Web vytvořil NovaFlow“
+   Jeden styl pro všechny weby. Samostatná komponenta: vše je pod
+   prefixem .nf-credit, nic dalšího na stránce neovlivní.
+
+   Barvy se přizpůsobí patičce přes 2 proměnné:
+     --nf-fg        barva v klidu (výchozí: zděděná barva, 60 % průhlednost)
+     --nf-fg-hover  barva při najetí (výchozí: zděděná barva naplno)
+   Světlá patička:  .nf-credit { --nf-fg: #6b6b75; --nf-fg-hover: #0b0b14; }
+   ========================================================= */
+
+.nf-credit {
+  --nf-violet: #5b2bff;
+  --nf-aqua: #22d3ee;
+  --nf-fg: currentColor;
+  --nf-fg-hover: currentColor;
+  --nf-ease: cubic-bezier(.22, 1, .36, 1);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding: .35em .2em;
+  font-size: .875rem;
+  line-height: 1;
+  color: var(--nf-fg);
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.nf-credit:not(:hover):not(:focus-visible) { opacity: .85; }
+.nf-credit { transition: opacity .3s var(--nf-ease), color .3s var(--nf-ease); }
+
+.nf-credit__by { font-weight: 400; letter-spacing: 0; }
+
+/* značka N: v klidu obrys, při najetí se „nakreslí“ barevným tahem */
+.nf-credit__mark { width: 1.35em; height: 1.35em; flex: none; overflow: visible; }
+.nf-credit__mark .nf-base { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .55; transition: opacity .3s; }
+.nf-credit__mark .nf-flow {
+  fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 48; stroke-dashoffset: 48;
+  transition: stroke-dashoffset .7s var(--nf-ease);
+}
+
+/* slovo NovaFlow + „protékající“ linka pod ním */
+.nf-credit__name {
+  position: relative;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  padding-bottom: .22em;
+  margin-bottom: -.22em;
+}
+.nf-credit__name::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--nf-violet), var(--nf-aqua));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .55s var(--nf-ease);
+}
+
+/* šipka ↗ vyjede až při najetí */
+.nf-credit__arrow {
+  width: .85em; height: .85em; flex: none; margin-left: -.15em;
+  fill: none; stroke: var(--nf-aqua); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+  opacity: 0; transform: translate(-4px, 4px);
+  transition: opacity .25s, transform .4s var(--nf-ease);
+}
+
+.nf-credit:hover, .nf-credit:focus-visible { color: var(--nf-fg-hover); }
+.nf-credit:hover .nf-base, .nf-credit:focus-visible .nf-base { opacity: 0; }
+.nf-credit:hover .nf-flow, .nf-credit:focus-visible .nf-flow { stroke-dashoffset: 0; }
+.nf-credit:hover .nf-credit__name::after, .nf-credit:focus-visible .nf-credit__name::after { transform: scaleX(1); }
+.nf-credit:hover .nf-credit__arrow, .nf-credit:focus-visible .nf-credit__arrow { opacity: 1; transform: none; }
+.nf-credit:focus-visible { outline: 2px solid var(--nf-aqua); outline-offset: 4px; border-radius: 6px; }
+.nf-credit:active .nf-credit__mark { transform: scale(.92); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-credit, .nf-credit * { transition-duration: .01ms !important; }
+}
