@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { useBooking } from "./booking/BookingProvider";
@@ -16,6 +16,14 @@ export default function Seasons() {
   const { dict } = useBooking();
   const t = dict.seasons;
   const [active, setActive] = useState(0);
+  const track = useRef<HTMLUListElement>(null);
+
+  const onTrackScroll = () => {
+    const el = track.current;
+    if (!el || el.scrollWidth <= el.clientWidth) return; // desktop grid doesn't scroll
+    setActive(Math.round(el.scrollLeft / el.clientWidth));
+  };
+  const goTo = (i: number) => track.current?.scrollTo({ left: i * track.current.clientWidth, behavior: "smooth" });
 
   return (
     <section data-tone="dark" className="relative mt-[clamp(80px,9vw,150px)] h-[min(100svh,980px)] min-h-[680px] overflow-hidden text-white">
@@ -37,13 +45,18 @@ export default function Seasons() {
           <p className="mx-auto mt-3 max-w-[30ch] px-5 text-[19px] lg:max-w-none font-light tracking-[0.03em] lg:font-normal [text-shadow:0_1px_18px_rgba(0,0,0,0.5)] lg:text-[26px]">{t.sub}</p>
         </Reveal>
 
-        <div className="wrap mt-auto pb-[clamp(110px,10vw,150px)] lg:pb-[150px] xl:pb-[160px]">
-          <ul className="no-scrollbar -mx-5 flex snap-x gap-4 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0">
+        <div className="wrap mt-auto pb-[clamp(96px,10vw,150px)] lg:pb-[150px] xl:pb-[160px]">
+          {/* Phones: one season per screen, swipe; the visible one sets the photo. Desktop: 4 columns, hover sets it. */}
+          <ul
+            ref={track}
+            onScroll={onTrackScroll}
+            className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain md:grid md:grid-cols-4 md:gap-6 md:overflow-visible"
+          >
             {t.items.map((item, i) => {
               const Icon = icons[i];
               const on = i === active;
               return (
-                <li key={item.title} className="w-[70vw] shrink-0 snap-center md:w-auto">
+                <li key={item.title} className="w-full shrink-0 snap-center md:w-auto">
                   <a
                     href={`#${targets[i]}`}
                     onMouseEnter={() => setActive(i)}
@@ -57,7 +70,7 @@ export default function Seasons() {
                     <span
                       className={clsx(
                         "caps arrow-link mt-1 text-[13px] transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)]",
-                        on ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0 md:opacity-0",
+                        on ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
                       )}
                     >
                       {item.link}
@@ -68,6 +81,22 @@ export default function Seasons() {
               );
             })}
           </ul>
+
+          {/* dots (phones only) */}
+          <div className="mt-6 flex justify-center md:hidden">
+            {t.items.map((item, i) => (
+              <button
+                key={item.title}
+                type="button"
+                aria-label={item.title}
+                aria-current={i === active}
+                onClick={() => goTo(i)}
+                className="grid size-11 place-items-center"
+              >
+                <span className={clsx("block h-[2px] rounded-full bg-white transition-all duration-500", i === active ? "w-7 opacity-100" : "w-3 opacity-50")} />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
