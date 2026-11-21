@@ -7,7 +7,7 @@ export default function History({ dict }: { dict: Dict }) {
   const t = dict.history;
   return (
     <section id="historie" data-tone="dark" className="relative overflow-hidden bg-night py-[clamp(90px,10vw,170px)] text-white">
-      <Image src="/img/house-arch.webp" alt="" fill sizes="100vw" className="object-cover opacity-[0.35] grayscale" />
+      <Image src="/img/cellar-door.webp" alt="" fill sizes="100vw" className="object-cover opacity-[0.35] grayscale" />
       <div className="absolute inset-0 bg-gradient-to-r from-night via-night/75 to-night/40" />
       <div className="wrap relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-24">
         <Reveal>

@@ -37,7 +37,7 @@ export default function Seasons() {
           <p className="mx-auto mt-3 max-w-[30ch] px-5 text-[19px] lg:max-w-none font-light tracking-[0.03em] lg:font-normal [text-shadow:0_1px_18px_rgba(0,0,0,0.5)] lg:text-[26px]">{t.sub}</p>
         </Reveal>
 
-        <div className="wrap mt-auto pb-[clamp(110px,10vw,150px)] lg:pb-[190px] xl:pb-[210px]">
+        <div className="wrap mt-auto pb-[clamp(110px,10vw,150px)] lg:pb-[150px] xl:pb-[160px]">
           <ul className="no-scrollbar -mx-5 flex snap-x gap-4 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0">
             {t.items.map((item, i) => {
               const Icon = icons[i];

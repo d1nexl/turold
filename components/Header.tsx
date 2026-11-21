@@ -8,7 +8,7 @@ import { useBooking } from "./booking/BookingProvider";
 import { site } from "@/lib/site";
 import { scrollToId } from "./SmoothScroll";
 
-const menuImages = ["/img/room-3.webp", "/img/sauna.webp", "/img/cellar-tunnel.webp", "/img/house-arch.webp", "/img/vineyard-hill.webp", "/img/vineyard-dusk.webp"];
+const menuImages = ["/img/room-3.webp", "/img/sauna.webp", "/img/cellar-tunnel.webp", "/img/cellar-door.webp", "/img/vineyard-hill.webp", "/img/vineyard-dusk.webp"];
 
 export default function Header() {
   const { dict, locale, openBooking } = useBooking();

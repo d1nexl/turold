@@ -58,7 +58,7 @@ const en: Dict = {
     close: "Close offer",
   },
   intro: {
-    title: ["Our luxury?", "Quiet and wine."],
+    title: ["Slow mornings,", "good wine."],
     sub: "A Pálava holiday at the pace of the vineyard",
     p1: "The late-18th-century house stands at the foot of the Holy Hill, a five-minute walk from the main square. Vineyards start right behind it; from the windows you see the château and the limestone cliffs of Pálava.",
     p2: "There are only eight rooms, so nobody gets lost here. Farm breakfast in the morning, a glass from our own cellar on the terrace at night.",

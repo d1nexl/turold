@@ -83,7 +83,7 @@ export function BookingFields({ tone, withButtons = true, calendarUp = true }: {
     <div ref={root} className="relative">
       <div
         className={clsx(
-          "flex h-[88px] items-center rounded-full border transition-colors duration-700 xl:h-[104px]",
+          "flex h-[76px] items-center rounded-full border transition-colors duration-700 xl:h-[84px]",
           tone === "dark" ? "border-white/80 text-white" : "border-ink/15 bg-white/95 text-ink shadow-[0_14px_40px_-18px_rgba(0,0,0,0.3)] backdrop-blur",
         )}
       >
@@ -170,18 +170,20 @@ export default function BookingBar() {
   }, []);
 
   const show = !hidden && panel === null;
+  // Desktop: the pill only appears once the hero is mostly scrolled away, so it never sits on the first screen.
+  const showDesktop = show && !overHero;
 
   return (
     <>
       {/* Desktop pill */}
       <div
         className={clsx(
-          "fixed inset-x-0 bottom-6 z-40 hidden px-[clamp(20px,4vw,64px)] transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] lg:block",
-          show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0",
+          "fixed inset-x-0 bottom-5 z-40 hidden px-[clamp(20px,4vw,64px)] transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] lg:block",
+          showDesktop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0",
         )}
       >
         <div className="mx-auto max-w-[1680px]">
-          <BookingFields tone={overHero ? "dark" : "light"} />
+          <BookingFields tone="light" />
         </div>
       </div>
 

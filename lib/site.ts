@@ -1,7 +1,7 @@
 export const site = {
   name: "TUROLD",
-  phone: "+420 519 000 140",
-  phoneHref: "tel:+420519000140",
+  phone: "+420 123 456 789",
+  phoneHref: "tel:+420123456789",
   email: "pobyt@turold-penzion.cz",
   street: "Svatokopecká 14",
   city: "692 01 Mikulov",

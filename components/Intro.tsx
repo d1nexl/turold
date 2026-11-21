@@ -22,7 +22,7 @@ export default function Intro({ dict }: { dict: Dict }) {
         <div className="paper relative pb-[clamp(60px,7vw,120px)] pt-[clamp(80px,10vw,160px)]">
           <Reveal className="relative ml-auto mr-[8%] w-[min(78%,640px)]">
             <div className="zoom relative aspect-[5/4] overflow-hidden">
-              <Image src="/img/courtyard.webp" alt="" fill sizes="(min-width:1024px) 40vw, 80vw" className="object-cover" />
+              <Image src="/img/cellar-houses.webp" alt="" fill sizes="(min-width:1024px) 40vw, 80vw" className="object-cover" />
             </div>
           </Reveal>
         </div>
